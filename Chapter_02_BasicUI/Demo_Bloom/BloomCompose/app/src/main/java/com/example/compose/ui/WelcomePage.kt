@@ -126,7 +126,6 @@ fun WelcomeContent() {
         WelcomeButtons()
     }
 }
-
 @Composable
 fun WelcomePage() {
     Box(

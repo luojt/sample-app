@@ -37,6 +37,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -147,10 +151,15 @@ fun BloomInfoList() {
 @Preview(showBackground = true)
 @Composable
 fun SearchBar() {
+    var searchStr by remember{
+        mutableStateOf("")
+    }
     Box {
         TextField(
-            value = "",
-            onValueChange = {},
+            value = searchStr,
+            onValueChange = {
+                searchStr = it
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
@@ -185,7 +194,7 @@ fun HomePage() {
         bottomBar = {
             BottomBar()
         }
-    ) {
+    ) {padding->
         Column(
             Modifier
                 .fillMaxSize()
@@ -290,7 +299,8 @@ fun BottomBar() {
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp)
-            .background(pink100)
+            .background(pink100),
+        backgroundColor = white
     ) {
         navList.forEach {
             BottomNavigationItem(
